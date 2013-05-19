@@ -25,17 +25,21 @@ PIC::PIC(){
   ctrl_1.outb(0x11);
   ctrl_2.outb(0x11);
   
-  mask_1.outb(32);
-  mask_2.outb(40);
-  
-  mask_1.outb(4);
-  mask_2.outb(2);
-  
-  mask_1.outb(3);
+  //initialise ICW2
+  mask_1.outb(32);      //offset for the IRQs
+  mask_2.outb(40);      //offset for the second PIC
+
+  //initialise ICW3
+  mask_1.outb(4);       //IRQ on the master for the slave
+  mask_2.outb(2);       //IRQ on the slave for the master
+
+  //initialise ICW4
+  mask_1.outb(3);       //automatic End Of Interrupt and 8086-architecture
   mask_2.outb(3);
   
-  mask_1.outb(0xFB);
-  mask_2.outb(0xFF);
+  //initialise OCW1
+  mask_1.outb(0xFB);    //allow only D0-D2 -> timer, keyboard, slave
+  mask_2.outb(0xFF);    //allow none
 }
 
 void PIC::allow(Interrupts interrupt){
@@ -74,7 +78,6 @@ void PIC::forbid(Interrupts interrupt){
 }
 
 
-/** \todo \~german implementieren \~english write implementation*/
 void PIC::ack(bool secondPIC){
     IO_Port ctrl_1(0x20), ctrl_2(0xa0);
 
