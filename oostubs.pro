@@ -3,7 +3,8 @@ CONFIG += console
 CONFIG -= qt
 
 SOURCES += \
-    src/machine/pic.cc
+    src/machine/pic.cc \
+    src/machine/keyctrl.cc
 
 HEADERS += \
     include/config.h \

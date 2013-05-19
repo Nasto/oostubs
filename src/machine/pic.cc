@@ -20,7 +20,8 @@
 /** \todo \~german verstehen \~english understand */
 PIC::PIC(){
   IO_Port ctrl_1(0x20), ctrl_2(0xa0), mask_1(0x21), mask_2(0xa1);
-  
+  //initialising the PIC's registers
+  //I have no idea about the specific values used here
   ctrl_1.outb(0x11);
   ctrl_2.outb(0x11);
   
@@ -37,16 +38,49 @@ PIC::PIC(){
   mask_2.outb(0xFF);
 }
 
-/** \todo \~german implementieren \~english write implementation*/
 void PIC::allow(Interrupts interrupt){
+    IO_Port mask_1(0x21), mask_2(0xa1); //registers we need to write to
+
+    CPU::enable_int();              //allowing a special interrupt is pointless if interrupts are disabled globally
+
+    unsigned char ocw1;
+
+    if (interrupt <= 8){            //first PIC
+        ocw1 = mask_1.inb();        //get current state to ensure previous bits stay setted
+        ocw1 &= ~(1 << interrupt);  //set the curresponding bit to 0 so that it's allowed
+        mask_1.outb(ocw1);          //and write it to the register
+    } else {                        //second PIC
+        ocw1 = mask_2.inb();
+        ocw1 &= ~(1<<(interrupt-8));
+        mask_2.outb(ocw1);
+    }
+
 }
 
-/** \todo \~german implementieren \~english write implementation*/
 void PIC::forbid(Interrupts interrupt){
+    IO_Port mask_1(0x21), mask_2(0xa1);
+
+    unsigned char ocw1;
+
+    if (interrupt <= 8){            //first PIC
+        ocw1 = mask_1.inb();        //get current state to ensure previous bits stay setted
+        ocw1 |= (1 << interrupt);   //set the curresponding bit to 1 so that it's forbidden
+        mask_1.outb(ocw1);          //and write it to the register
+    } else {                        //second PIC
+        ocw1 = mask_2.inb();
+        ocw1 |= (1<<(interrupt-8));
+        mask_2.outb(ocw1);
+    }
 }
+
 
 /** \todo \~german implementieren \~english write implementation*/
 void PIC::ack(bool secondPIC){
+    IO_Port ctrl_1(0x20), ctrl_2(0xa0);
+
+    //I'm done here
+    ctrl_1.outb(0x20);
+    ctrl_2.outb(0x20);
 }
 
 /** \todo \~german implementieren \~english write implementation*/
