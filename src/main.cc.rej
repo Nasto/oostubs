@@ -1,0 +1,14 @@
+--- src/main.cc	2013-04-27 09:04:58.609128500 +0200
++++ src/main.cc	2013-05-02 00:42:29.846133600 +0200
+@@ -64,7 +80,11 @@
+  **/
+ void kernel(uint32_t magic, const Multiboot_Info* info){
+   
++  #if USE_TASK == 10
+   TaskClass task(magic, info);
++  #else
++    TaskClass task;
++  #endif
+   
+   task.action();
+   
