@@ -10,16 +10,19 @@
 #                    INCLUDES                     #
 \* * * * * * * * * * * * * * * * * * * * * * * * */
 #include "device/panic.h"
+#include "useful/kout.h"
+#include "useful/cpu.h"
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *\
 #                    METHODS                      # 
 \* * * * * * * * * * * * * * * * * * * * * * * * */
 
-/** \todo \~german implementieren \~english write implementation*/
+
 Panic::Panic(){
 }
 
-/** \todo \~german implementieren \~english write implementation*/
 void Panic::trigger(){
+    kout << gateInterruptNumber;
+    cpu.halt();                     //freeze!
 }

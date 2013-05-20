@@ -31,7 +31,7 @@ void Plugbox::assign(unsigned short slot, Gate& gate){
 
 Gate& Plugbox::report(unsigned short slot){
     if(slot<256){
-        return *(gates[slot]);      //return the gate for the interrupt (panic from constructor if not specified)
+        return *(gates[slot]);      //return the gate for the interrupt
     } else {
         return panic;               //invalid interrupts get panic anyways
     }

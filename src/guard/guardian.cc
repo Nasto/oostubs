@@ -50,6 +50,7 @@ extern Plugbox plugbox;
  * \todo write implementation
  */
 void guardian (unsigned short slot) {
+
     if(slot <= 256){
         Gate &g = plugbox.report(slot);
         g.trigger();

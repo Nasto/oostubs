@@ -25,5 +25,7 @@ HEADERS += \
     include/device/panic.h \
     include/device/keyboard.h \
     include/machine/keyctrl.h \
-    include/machine/key.h
+    include/machine/key.h \
+    include/useful/plugbox.h \
+    include/useful/pic.h
 
