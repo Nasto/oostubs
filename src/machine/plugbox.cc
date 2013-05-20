@@ -17,16 +17,22 @@
 #                    METHODS                      # 
 \* * * * * * * * * * * * * * * * * * * * * * * * */
 
-/** \todo \~german implementieren \~english write implementation*/
+//constructor
 Plugbox::Plugbox(){
+
+    for(int i=0;i<256;i++){
+        assign(i,panic);            //initialise every slot to panic
+    }
 }
 
-/** \todo \~german implementieren \~english write implementation*/
 void Plugbox::assign(unsigned short slot, Gate& gate){
+    gates[slot] = &gate;            //just put the corresponding gate in the class-array
 }
 
-/** \todo \~german implementieren \~english write implementation*/
 Gate& Plugbox::report(unsigned short slot){
-  /// \todo Dummy entfernen, remove dummy
-  return panic;
+    if(slot<256){
+        return *(gates[slot]);      //return the gate for the interrupt (panic from constructor if not specified)
+    } else {
+        return panic;               //invalid interrupts get panic anyways
+    }
 }

@@ -34,21 +34,7 @@
  **/
 class Plugbox {
   private:
-    /** 
-     * \~german
-     * \brief Array von Zeigern auf Gate-Objekte
-     * 
-     * Der Puffer soll Gate-Zeiger für alle möglichen 256 Interrupts vorhalten.
-     * 
-     * \todo deklarieren
-     * 
-     * \~english
-     * \brief array of pointers to Gate objects
-     * 
-     * The buffer should contain gates for all 256 possible interrupts.
-     *
-     * \todo write declaration
-     **/
+    Gate* gates[256];   //Pointers for every possible Interrupt
     
   public:
     /** 

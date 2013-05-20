@@ -11,6 +11,9 @@
 \* * * * * * * * * * * * * * * * * * * * * * * * */
 #include "useful/kout.h"
 #include "useful/cpu.h"
+#include "guard/gate.h"
+#include "useful/panic.h"
+#include "machine/plugbox.h"
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *\
 #            declare methods as c-like            #
@@ -20,7 +23,7 @@ extern "C" void guardian (unsigned short slot);
 extern "C" void handleException(unsigned short slot, void* eip, unsigned int eflags, unsigned short cs);
 extern "C" void handleExceptionE(unsigned short slot, void* eip, unsigned int eflags, unsigned short cs, unsigned int errorCode);
 extern "C" void handleExceptionReserved(unsigned short slot);
-
+extern Plugbox plugbox;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *\
 #                    METHODS                      #
@@ -47,6 +50,12 @@ extern "C" void handleExceptionReserved(unsigned short slot);
  * \todo write implementation
  */
 void guardian (unsigned short slot) {
+    if(slot <= 256){
+        Gate &g = plugbox.report(slot);
+        g.trigger();
+    } else {
+        panic.trigger();
+    }
 
 }
 
