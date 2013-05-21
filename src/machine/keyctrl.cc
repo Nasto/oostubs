@@ -216,14 +216,14 @@ Key Keyboard_Controller::key_hit () {
     Key invalid;                    // invalid default key
     int status;
 
-    do{
-        status = ctrl_port.inb();
-    } while((status & outb) == 0);  //wait for outputbuffer to be empty
+    status = ctrl_port.inb();
+    if((status & outb) != 0 && (status & auxb)==0){  //wait for outputbuffer to be empty
 
-    code = data_port.inb();         //get the key
+        code = data_port.inb();         //get the key
 
-    if(key_decoded()){              //I know this key
-        return gather;
+        if(key_decoded()){              //I know this key
+            return gather;
+        }
     }
 
     return invalid;                 //I don't know this key

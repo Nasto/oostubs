@@ -38,14 +38,12 @@ PIC::PIC(){
   mask_2.outb(3);
   
   //initialise OCW1
-  mask_1.outb(0xFB);    //PIC1 (master) - allow only D0-D2 -> timer, keyboard, slave
+  mask_1.outb(0xFB);    //PIC1 (master) - allow only D2 -> slave
   mask_2.outb(0xFF);    //PIC2 (slave) - allow none
 }
 
 void PIC::allow(Interrupts interrupt){
     IO_Port mask_1(0x21), mask_2(0xa1); //registers we need to write to
-
-    cpu.enable_int();            //allowing a special interrupt is pointless if interrupts are disabled globally
 
     unsigned char ocw1;
 

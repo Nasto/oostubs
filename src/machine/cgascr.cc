@@ -23,12 +23,12 @@ void CGA_Screen::setpos (unsigned short x, unsigned short y) {
     IO_Port indexreg(0x3d4);                //indirect access
     IO_Port datareg(0x3d5);
 
-    int pos = (x+(y*80));                 //calculate the position
+    int pos = (x+(y*80));                   //calculate the position
 
     indexreg.outb(15);
-    datareg.outb(pos & 0xff);         //write first half (8bit)
+    datareg.outb(pos & 0xff);               //write first half (8bit)
     indexreg.outb(14);
-    datareg.outb((pos >> 8) & 0xff);       //wirte second half (3bit)
+    datareg.outb((pos >> 8) & 0xff);        //wirte second half (3bit)
 }
 
 void CGA_Screen::getpos (unsigned short& x, unsigned short& y) const{

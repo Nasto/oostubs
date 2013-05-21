@@ -8,7 +8,10 @@ SOURCES += \
     src/guard/guardian.cc \
     src/machine/plugbox.cc \
     src/device/keyboard.cc \
-    src/device/panic.cc
+    src/device/panic.cc \
+    src/object/strbuf.cc \
+    src/user/task2.cc \
+    src/machine/cgascr.cc
 
 HEADERS += \
     include/config.h \
