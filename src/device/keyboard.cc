@@ -13,6 +13,7 @@
 #include "useful/plugbox.h"
 #include "useful/kout.h"
 #include "useful/pic.h"
+extern int globalTaskChoice;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *\
 #                    METHODS                      # 
@@ -29,9 +30,13 @@ void Keyboard::plugin(){
 void Keyboard::trigger(){
     Key k = key_hit();
 
-    if(k.ctrl() && k.alt() && (k.scancode()==83)){
+    if(k.alt() && k.ctrl() && (k.scancode()==83)){
         reboot();
-    } else {
+    } else if(k.alt() && k == '1'){
+        globalTaskChoice = 1;
+    } else if(k.alt() && k == '2'){
+        globalTaskChoice = 2;
+    }else {
         if(k.valid()){
             kout.setpos(20,15);
             kout << k;

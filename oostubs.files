@@ -1120,3 +1120,8 @@ src/user/analyse.cc
 src/user/task3B.cc
 src/user/task3A.cc
 src/user/task2.cc
+include/user/task2.h
+include/user/task3B.h
+include/user/task3A.h
+src/device/panic.cc
+src/device/keyboard.cc

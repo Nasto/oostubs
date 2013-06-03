@@ -14,6 +14,4 @@ digraph "CGA_Screen::getpos"
   Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
   Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
   Node5 [label="Task2::action",height=0.2,width=0.4,color="black",URL="$classTask2.html#aa5de17846032b02d6d0819cdc78b1b3e",tooltip="prints the line"];
-  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node6 [label="kernel",height=0.2,width=0.4,color="black",URL="$main_8cc.html#a796315624c9bcf31fd673cb62e4b9819",tooltip="kernel entry point"];
 }
