@@ -35,7 +35,6 @@ void Keyboard::trigger(){
         if(k.valid()){
             kout.setpos(20,15);
             kout << k;
-            kout.flush();
         }
     }
 }

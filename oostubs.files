@@ -1116,3 +1116,7 @@ src/object/o_stream.cc
 src/object/strbuf.cc
 src/user/task1.cc
 src/main.cc
+src/user/analyse.cc
+src/user/task3B.cc
+src/user/task3A.cc
+src/user/task2.cc

@@ -81,17 +81,33 @@ O_Stream& O_Stream::operator << (long value) {
 }
 
 O_Stream& O_Stream::operator << (unsigned long value) {
+    if(base==hex){
+        unsigned long value_copy = value;
+        int counter=(value > base) ? 1 : 0;
+        while(value_copy > base){
+            value_copy = value_copy/base;
+            counter++;
+        }
+        for(int i=7-counter;i>0;i--){
+            *this<<'0';
+        }
+    }
+    return putToBuff(value);
+}
 
-    if (value < base) {         //One char is enough
-        if (value < 10) {       //this is where I can use numbers
+O_Stream& O_Stream::putToBuff(unsigned long value){
+
+    if (value < base) { //One char is enough
+        if (value < 10) { //this is where I can use numbers
             put((char)('0' + value));
-        } else {                //I'll need characters here
+        } else { //I'll need characters here
             put((char)('A' + value-10));
         }
-    } else {                    //I'll need mutiple chars
-        *this << (value/base);  //recursion
-        *this << (value%base);
+    } else { //I'll need mutiple chars
+        putToBuff(value/base); //recursion
+        putToBuff(value%base);
     }
+
   return *this;
 }
 

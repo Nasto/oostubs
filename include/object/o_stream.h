@@ -199,6 +199,8 @@ class O_Stream : public Stringbuffer{
     
     /** \copydoc operator<<(char value) **/
     O_Stream& operator << (unsigned long value);
+
+    O_Stream& putToBuff(unsigned long value);
     
     /** \copydoc operator<<(char value) **/
     O_Stream& operator << (long value);
