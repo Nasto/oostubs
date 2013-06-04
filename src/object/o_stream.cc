@@ -82,13 +82,13 @@ O_Stream& O_Stream::operator << (long value) {
 
 O_Stream& O_Stream::operator << (unsigned long value) {
     if(base==hex){
-        unsigned long value_copy = value;
-        int counter=(value > base) ? 1 : 0;
-        while(value_copy > base){
-            value_copy = value_copy/base;
+        unsigned int mybase = (unsigned int)base;
+        int counter=1;
+        while(value > mybase){
+            mybase = mybase*(unsigned int)base;
             counter++;
         }
-        for(int i=7-counter;i>0;i--){
+        for(int i=8-counter;i>0;i--){
             *this<<'0';
         }
     }
@@ -112,7 +112,10 @@ O_Stream& O_Stream::putToBuff(unsigned long value){
 }
 
 O_Stream& O_Stream::operator << (void* value) {
+    Base oldbase = base;
+    base=hex;
     *this << ((unsigned long) value);
+    base = oldbase;
     return *this;
 }
 

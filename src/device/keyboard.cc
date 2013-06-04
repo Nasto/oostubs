@@ -36,10 +36,5 @@ void Keyboard::trigger(){
         globalTaskChoice = 1;
     } else if(k.alt() && k == '2'){
         globalTaskChoice = 2;
-    }else {
-        if(k.valid()){
-            kout.setpos(20,15);
-            kout << k;
-        }
     }
 }
